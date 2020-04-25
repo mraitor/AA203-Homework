@@ -60,8 +60,8 @@ while norm(u_bar - u_bar_prev) > epsilon
     u_bar_prev = u_bar; % used to check termination condition
     
     for t=1:num_steps
-        dx = x_bar(:,t) - x_bar_prev(:,t);
-        u_bar(:,t) = u_bar_prev(:,t) + l(:,t) + L(:,:,t)*(dx);% TODO: implement control update
+        if
+        u_bar(:,t) = u_bar_prev(:,t) + l(:,t) + L(:,:,t)*(x_bar(:,t) - x_bar_prev(:,t));% TODO: implement control update
         x_bar(:,t+1) = f(x_bar(:,t),u_bar(:,t),dt);
     end
     
@@ -78,8 +78,8 @@ function [l,L,P,p] = backward_riccati_recursion(P,p,A,B,Q,q,R,r)
 % return controller terms l,L and value terms p,P
 % refer to lecture 4 slides
 
-Q_tilde_xx = Q + A'*P*A;
-Q_tilde_uu = R + B'*P*B;
+Q_tilde_xx = Q+A'*P*A;
+Q_tilde_uu = R+B'*P*B;
 Q_tilde_x = q + A'*p;
 Q_tilde_u = r + B'*p;
 Q_tilde_ux = B'*P*A;

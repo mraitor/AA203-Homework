@@ -10,7 +10,7 @@
 clear all; clc; close all;
 
 animate = true; % change to visualize animation
-noise = false; % change to toggle stochastic disturbance
+noise = true; % change to toggle stochastic disturbance
 
 f = @sim_cartpole;
 dt = 0.1; % we work with discrete time
@@ -55,6 +55,7 @@ end
 
 figure; 
 plot(x');
+legend("x", "theta", "x dot", "theta dot");
 
 figure; 
 plot(u,'--');

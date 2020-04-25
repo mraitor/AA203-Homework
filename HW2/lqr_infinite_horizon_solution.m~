@@ -21,7 +21,7 @@ P_new = P_current;
 L_current = zeros(size(Q,1), size(R,2)); %general form, in ex. creates 4x1 zeros matrix
 L_new = L_current;
 firstIt = true; 
-while (norm(L_new - L_current, 2) >= 1e-4) || (firstIt == true)
+while (norm(L_new - L_current, 2) <= 1e-4) || (firstIt == true)
     if firstIt == true
         firstIt = false;
     end
@@ -31,8 +31,5 @@ while (norm(L_new - L_current, 2) >= 1e-4) || (firstIt == true)
     P_new = Q + L_new'*R*L_new + (A + B*L_new)'*P_current*(A + B*L_new);
    
 end
-
-P = P_new;
-L = L_new;
 
 end

@@ -37,7 +37,7 @@ while norm(u_bar - u_bar_prev) > epsilon
     % getting our control
     
     % TODO: compute linear terms in cost function
-    qf = (-(x_bar_prev(:,num_steps+1)' + goal_state')*Qf)';
+    qf = ((x_bar_prev(:,num_steps+1)' - goal_state')*Qf)';
     
     % initialize value terms at terminal cost
     P = Qf;
@@ -48,8 +48,8 @@ while norm(u_bar - u_bar_prev) > epsilon
         [A,B,c] = linearize_dyn(x_bar(:,t),u_bar(:,t),dt);
         
         % TODO: again, only need to compute linear terms in cost function 
-        q = (-(x_bar_prev(:,t)' + goal_state')*Q)';
-        r = (-u_bar(t)'*R)';
+        q = ((x_bar_prev(:,t)' - goal_state')*Q)';
+        r = (u_bar(t)'*R)';
         
         [lt,Lt,P,p] = backward_riccati_recursion(P,p,A,B,Q,q,R,r);
         l(:,t) = lt;

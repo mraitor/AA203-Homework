@@ -33,7 +33,7 @@ for i = 1:N
 end
 
 % Plotting
-fprintf('Optimal Final Quantity for the Second Substance = %f\n\n',Fval);
+fprintf('Optimal Final Quantity for the Second Substance = %f\n\n',-Fval);
 subplot(131); plot(t,x,'linewidth',3);
 title('\textbf{a) First Substance}','interpreter','latex','FontSize',22,'FontWeight','bold');
 xlabel('\boldmath{$t$} \ \textbf{(s)}','interpreter','latex','FontSize',20,'FontWeight','bold');

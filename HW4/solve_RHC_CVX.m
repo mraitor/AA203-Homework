@@ -1,6 +1,7 @@
 %hw2 p2a - use CVX to solce RHC problems
 %Note: I drew heavily from provided code from SCP in problem 1!
-function [x, u, isAtGoal] = solve_RHC_CVX(A, B, x_bar, u_bar, Qf, Q, R, x0, N)
+function [x, u, isAtGoal] = solve_RHC_CVX(A, B, x_bar, u_bar, Qf, Q, R, x0, x0isDef, xf, xfisDef, N)
+N = N+1; %I wrote my code based on K=1...N, not 0 to N, so quick adjustment at end to match problem specs.
 num_steps = N-1;
 isAtGoal = false;
 n = size(Q,1); % get the state dimension
@@ -38,7 +39,7 @@ for i = 1:num_steps %for N time points, N-1 constraints linking their intermedia
 end
 % initial condition constraint
 % if x0 defined, make it a part of the constrint matrix
-if exist('x0','var')
+if x0isDef %exist('x0','var')
     [nRowsC, nColsC] = size(C);
     C = vertcat(C, zeros(n,nColsC)); %add zeros to bottom of c to append ic constraint
     C(nRowsC+1:nRowsC+n, x_start(1):x_end(1)) = eye(n);
@@ -46,7 +47,7 @@ if exist('x0','var')
 end
 %     %final condition constraint
 %     %if xf defined, make it part of the constraint matrix
-if exist('xf','var')
+if xfisDef %exist('xf','var')
     [nRowsC, nColsC] = size(C);
     C = vertcat(C, zeros(n,nColsC)); %add zeros to bottom of c to append ic constraint
     C(nRowsC+1:nRowsC+n, x_start(num_steps):x_end(num_steps)) = eye(n);
@@ -83,4 +84,9 @@ u = var(u_shift+1:(n+m)*N);
 % value for this iteration.
 fprintf("Current Objective value: %f \n" ,(var)'*M*(var))
 
+x = reshape(x,n,[]);
+u = reshape(u,m,[]);
+tol = 0.001;
+if xfisDef && norm(x(:,end)' - xf) <= tol
+    isAtGoal = true;
 end

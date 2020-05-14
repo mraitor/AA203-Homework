@@ -86,7 +86,7 @@ function [x,u] = scp(x_old, u_old, u_lb, u_ub, f, linearize_dynamics, Q, R, Qf, 
         C(x_start(i):x_end(i), x_start(i):x_end(i)) = -A;
         C(x_start(i):x_end(i), u_start(i):u_end(i)) = -B;
         C(x_start(i):x_end(i), x_start(i+1):x_end(i+1)) = eye(n);
-        d(x_start(i):x_end(i)) = (z_old(x_start(i+1):x_end(i+1)) - z_old(x_start(i):x_end(i))) - (A-eye(n))*z_old(x_start(i):x_end(i)) - B*z_old(u_start(i):u_end(i));
+        d(x_start(i):x_end(i)) = ??(z_old(x_start(i):x_end(i)), z_old(u_start(i):u_end(i))) - (A-eye(n))*z_old(x_start(i):x_end(i)) - B*z_old(u_start(i):u_end(i));
     end
     % initial condition constraint
         % TODO - Please add the initial codition constraint

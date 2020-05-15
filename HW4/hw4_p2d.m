@@ -1,4 +1,4 @@
-%hw 4 p 2c
+%hw 4 p 2d
 
 clear all;
 close all;
@@ -13,10 +13,10 @@ Q = eye(n)';
 R = 0.01;
 
 [P_inf, G, E] = dare(A, B, Q, R);
-%% p2 c
+%% p2 d
 x_bar = 10;
 u_bar = 1;
-N = 2;
+N = 6;
 T = 20;
 P = P_inf;
 xf = [0 0]';

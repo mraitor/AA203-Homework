@@ -1,0 +1,39 @@
+%hw 4 p 2f
+
+clear all;
+close all;
+clc;
+
+n = 2;
+m = 1;
+A = [1 1;
+    0 1];
+B = [0 1]';
+Q = eye(n)';
+R = 0.01;
+
+[P_inf, G, E] = dare(A, B, Q, R);
+%% p2 h
+x_bar = 10;
+u_bar = 1;
+% N = 6;
+T = 20;
+P = P_inf;
+xf = [0 0]';
+res = 1;
+%loop through discritized options for state to solve for positive, control
+%invariant set approximation
+N_list = [16 8 4 2];
+figure;
+hold on
+for i = 1:length(N_list)
+    x0 = [-4.5, 2]';
+    N = N_list(i);
+    %          x0 = [0 2]';
+    [x_mat, u_mat, goalReached] = solve_MPC(A, B, x_bar, u_bar, P, Q, R, x0, true, xf, true, N, T);
+    
+    cost(i) = x_mat(:,end)'*(P-Q)*x_mat(:,end) + x_mat(:,1:end-1)'*Q.*x_mat(:,1:end-1) + dot(u_mat,R*u_mat)
+
+    plot(x_mat(1,:), x_mat(2,:));
+end
+% fig

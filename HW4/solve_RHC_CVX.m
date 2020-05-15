@@ -1,6 +1,6 @@
 %hw2 p2a - use CVX to solce RHC problems
 %Note: I drew heavily from provided code from SCP in problem 1!
-function [x, u, isAtGoal] = solve_RHC_CVX(A, B, x_bar, u_bar, Qf, Q, R, x0, x0isDef, xf, xfisDef, N)
+function [x, u, isAtGoal, cvx_status] = solve_RHC_CVX(A, B, x_bar, u_bar, Qf, Q, R, x0, x0isDef, xf, xfisDef, N)
 N = N+1; %I wrote my code based on K=1...N, not 0 to N, so quick adjustment at end to match problem specs.
 num_steps = N-1;
 isAtGoal = false;

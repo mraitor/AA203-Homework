@@ -38,13 +38,13 @@ hold on
 % plot(u_mat(1,:))
 
 x0 = [-4.5, 3]';
-[x_mat,u_mat, ~] = solve_RHC_CVX(A, B, x_bar, u_bar, P, Q, R, x0, true, xf, false, N);
+[x_mat,u_mat, ~] = solve_MPC(A, B, x_bar, u_bar, P, Q, R, x0, true, xf, false, N, T);
 % x_mat = reshape(x,n,[]);
 % u_mat = reshape(u,m,[]);
 % figure
 % subplot(2,1,1)
 plot(x_mat(1,:),x_mat(2,:))
-legend(strcat('x0 = ', num2str(x0')), strcat('x0 = ', num2str(x0')))
+legend(strcat('x0 = ', '-4.5, 2'), strcat('x0 = ', '-4.5, 4'))
 % hold on
 % plot(x_mat(2,:))
 % subplot(2,1,2)

@@ -1,4 +1,4 @@
-%hw 4 p 2c
+%hw 4 p 2e
 
 clear all;
 close all;
@@ -33,7 +33,7 @@ for i = 1:length(x1Disc)
     for j = 1:length(x2Disc)
          x0 = [x1Disc(i) x2Disc(j)]';
 %          x0 = [0 2]';
-         [x_mat, u_mat, goalReached] = solve_MPC(A, B, x_bar, u_bar, P, Q, R, x0, true, xf, true, N, T);
+         [x_mat, u_mat, goalReached] = solve_MPC(A, B, x_bar, u_bar, P, Q, R, x0, true, xf, false, N, T);
          if goalReached
              scatter(x0(1),x0(2),'b')
          else

@@ -13,7 +13,7 @@ for t = 1:T
         u_hist(:,t) = u(:,1);
         if ~xfisDef %break if succesfully solved opt and no goal set
             isAtGoalFinal = true;
-            break
+%             break
         elseif xfisDef && (norm(x_hist(:,t+1) - xf) <= tol) %break if solved opt prob and at goal
             isAtGoalFinal = true;
             break

@@ -15,7 +15,9 @@ gamma = 0.95 # discount factor
 def Riccati(A,B,Q,R):
 
     # TODO implement infinite horizon riccati recursion
-    
+    P = Q + np.dot(np.transpose(A),np.dot(P,A)) - np.dot(np.transpose(A), np.dot(P, np.dot(B, np.dot(np.linalg.inv(R + np.dot(np.transpose(B), np.dot(P,B))), np.dot(np.tranpsose(B),np.dot(P,A))))))
+    #define K
+    K = np.dot(np.linalg.inv(R + np.dot(np.transpose(B), np.dot(P, B))), np.dot(np.transpose(B), np.dot(P,A)))
     return L,P
 
 
